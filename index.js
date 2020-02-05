@@ -18,9 +18,11 @@ app.get("/", (req, res) => {
 });
 
 const userRoutes = require("./routes/User");
+const teamRoutes = require("./routes/team");
 
 app.use(cookieParser());
 app.use("/user", userRoutes);
+app.use("/team", teamRoutes);
 
 app.listen(port, () => {
   console.log("Port is listening on port ", port);
