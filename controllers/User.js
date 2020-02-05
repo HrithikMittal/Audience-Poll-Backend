@@ -12,6 +12,23 @@ const signup = (req, res) => {
     });
 };
 
-export default {
-  signup
+const signin = (req, res) => {
+  const user = req.body;
+  User.find({ regno: user.regno })
+    .then(retuser => {
+      if (!retuser) {
+        return res.json({ message: "User not found" });
+      }
+      if (retuser.password === user.password) {
+        res.json({ message: "User is login successfully" });
+      }
+    })
+    .catch(err => {
+      console.log("Error is ", err.message);
+    });
+};
+
+module.exports = {
+  signup,
+  signin
 };
