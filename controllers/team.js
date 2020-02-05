@@ -1,20 +1,33 @@
 const _ = require("underscore");
 const Team = require("../modals/team");
 
-const ranking = (req, res) => {
-  const rank = req.body;
+const teamCreate = (req, res) => {
+  const newTeam = new Team(req.body);
+  newTeam
+    .save()
+    .then(team => {
+      res.json({ Team: newTeam });
+    })
+    .catch(err => {
+      console.log("Error is ", err.message);
+    });
+};
+
+const ranking = async (req, res) => {
+  //   const rank = req.body;
   rank = [{ team1: 2 }, { team2: 1 }, { team3: 3 }];
-  rank.map(team => {
-    Team.find({ name: team.name })
-      .then(res => {
-        let r = res.rank;
-        r = (r + team.rank) / 2;
+  await rank.map(async team => {
+    await Team.findOne({ name: Object.keys(team)[0] })
+      .then(async resultTeam => {
+        let r = resultTeam.rank;
+        r = (r + Object.values(team)[0]) / 2;
         const newex = { rank: r };
-        team = _.extend(newex);
-        team
+        resultTeam = _.extend(resultTeam, newex);
+
+        await resultTeam
           .save()
           .then(() => {
-            res.json("Done");
+            return res.end("Done");
           })
           .catch(err => {
             console.log("Error is ", err.message);
@@ -26,4 +39,4 @@ const ranking = (req, res) => {
   });
 };
 
-module.exports = { ranking };
+module.exports = { ranking, teamCreate };

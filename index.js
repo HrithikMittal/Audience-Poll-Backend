@@ -4,6 +4,7 @@ const dotenv = require("dotenv").config();
 const port = process.env.PORT;
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
 
 mongoose.connect(
   process.env.MONGO_URI,
@@ -20,6 +21,7 @@ app.get("/", (req, res) => {
 const userRoutes = require("./routes/User");
 const teamRoutes = require("./routes/team");
 
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use("/user", userRoutes);
 app.use("/team", teamRoutes);

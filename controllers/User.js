@@ -7,8 +7,11 @@ const signup = (req, res) => {
   const newUser = new User(req.body);
   newUser
     .save()
-    .then((req, res) => {
-      res.json({ message: "User Signup Successfully", userDetails: newUser });
+    .then((req, resp) => {
+      return res.json({
+        message: "User Signup Successfully",
+        userDetails: newUser
+      });
     })
     .catch(err => {
       console.log("Error is ", err.message);
@@ -17,13 +20,13 @@ const signup = (req, res) => {
 
 const signin = (req, res) => {
   const user = req.body;
-  User.find({ regno: user.regno })
+  User.findOne({ regno: user.regno })
     .then(retuser => {
       if (!retuser) {
         return res.json({ message: "User not found" });
       }
-      if (retuser.password !== user.password) {
-        res.json({ message: "Password is wrong" });
+      if (retuser.password != user.password) {
+        return res.json({ message: "Password is wrong" });
       }
       const token = jwt.sign({ _id: retuser._id }, process.env.JWT_SECRET);
       res.cookie("t", token, { expire: new Date() + 9999 });
