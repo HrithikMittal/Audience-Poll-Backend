@@ -9,11 +9,7 @@ router.get("/", (req, res) => {
 });
 
 router.post("/teamcreate", teamControllers.teamCreate);
-router.post(
-  "/postranking",
-  userControllers.requireSignIn,
-  teamControllers.ranking
-);
+router.post("/postranking", teamControllers.ranking);
 router.get("/getranking", teamControllers.getPostion);
 router.get("/getteams", teamControllers.getTeams);
 

@@ -3,6 +3,8 @@ const Team = require("../modals/team");
 
 const teamCreate = (req, res) => {
   const newTeam = new Team(req.body);
+  newTeam.id = newTeam._id;
+  console.log(newTeam);
   newTeam
     .save()
     .then(team => {
@@ -51,9 +53,8 @@ const getPostion = (req, res) => {
 
 const getTeams = (req, res) => {
   Team.find()
-    .select("name")
-    .then(teams => {
-      res.json(teams);
+    .then(async teams => {
+      await res.json(teams);
     })
     .catch(err => {
       console.log("Error is ", err.message);
