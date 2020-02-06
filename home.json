@@ -1,6 +1,9 @@
 {
+  "/": "GET || All the available API's",
   "/user/signup": "POST || To Signup into the System",
   "/user/signin": "POST || To Login into the System",
   "/team/teamcreate": "POST || To create a team",
-  "/team/ranking": "POST || To Post rank with object of array"
+  "/team/postranking": "POST || To Post rank with object of array",
+  "/team/getranking": "GET || To Get ranking of all the teams",
+  "/team/getteams": "GET || To Get name of all available teams"
 }

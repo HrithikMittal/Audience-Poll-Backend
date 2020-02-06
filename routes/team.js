@@ -15,5 +15,6 @@ router.post(
   teamControllers.ranking
 );
 router.get("/getranking", teamControllers.getPostion);
+router.get("/getteams", teamControllers.getTeams);
 
 module.exports = router;

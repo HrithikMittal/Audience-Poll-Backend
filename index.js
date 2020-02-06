@@ -14,8 +14,9 @@ mongoose.connect(
   }
 );
 
+const data = require("./home.json");
 app.get("/", (req, res) => {
-  res.send("Hey");
+  res.send(data);
 });
 
 const userRoutes = require("./routes/User");

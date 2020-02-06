@@ -49,4 +49,15 @@ const getPostion = (req, res) => {
     });
 };
 
-module.exports = { ranking, teamCreate, getPostion };
+const getTeams = (req, res) => {
+  Team.find()
+    .select("name")
+    .then(teams => {
+      res.json(teams);
+    })
+    .catch(err => {
+      console.log("Error is ", err.message);
+    });
+};
+
+module.exports = { ranking, teamCreate, getPostion, getTeams };
