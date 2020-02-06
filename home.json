@@ -1,0 +1,6 @@
+{
+  "/user/signup": "POST || To Signup into the System",
+  "/user/signin": "POST || To Login into the System",
+  "/team/teamcreate": "POST || To create a team",
+  "/team/ranking": "POST || To Post rank with object of array"
+}

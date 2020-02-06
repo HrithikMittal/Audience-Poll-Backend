@@ -22,6 +22,7 @@ const userRoutes = require("./routes/User");
 const teamRoutes = require("./routes/team");
 
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(cookieParser());
 app.use("/user", userRoutes);
 app.use("/team", teamRoutes);

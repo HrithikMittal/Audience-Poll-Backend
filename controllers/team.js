@@ -14,8 +14,7 @@ const teamCreate = (req, res) => {
 };
 
 const ranking = async (req, res) => {
-  //   const rank = req.body;
-  rank = [{ team1: 2 }, { team2: 1 }, { team3: 3 }];
+  let rank = req.body;
   await rank.map(async team => {
     await Team.findOne({ name: Object.keys(team)[0] })
       .then(async resultTeam => {
@@ -39,4 +38,15 @@ const ranking = async (req, res) => {
   });
 };
 
-module.exports = { ranking, teamCreate };
+const getPostion = (req, res) => {
+  Team.find()
+    .select("name rank")
+    .then(teams => {
+      res.json(teams);
+    })
+    .catch(err => {
+      console.log("Error is ", err.message);
+    });
+};
+
+module.exports = { ranking, teamCreate, getPostion };

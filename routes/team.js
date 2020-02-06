@@ -9,6 +9,11 @@ router.get("/", (req, res) => {
 });
 
 router.post("/teamcreate", teamControllers.teamCreate);
-router.post("/ranking", teamControllers.ranking, userControllers.requireSignIn);
+router.post(
+  "/postranking",
+  userControllers.requireSignIn,
+  teamControllers.ranking
+);
+router.get("/getranking", teamControllers.getPostion);
 
 module.exports = router;
